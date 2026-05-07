@@ -1,0 +1,60 @@
+.btn {
+  color: white;
+  height: 2.5rem;
+  border: 0.06rem solid whitesmoke;
+  border-radius: 0.5rem;
+  width: 100%;
+}
+.btn:focus {
+  outline: none;
+  box-shadow: 0px 0px 2px 0.5px rgb(161, 162, 163);
+}
+.btn:hover {
+  cursor: pointer;
+  transition: all 1s;
+}
+.btn:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+.btn-back {
+  width: fit-content;
+  border: none;
+  background-color: transparent;
+  color: rgb(3, 140, 219);
+  text-decoration: underline;
+}
+.btn-back:focus {
+  outline: none;
+}
+.btn-outline {
+  width: fit-content;
+  border: none;
+  background-color: transparent;
+  color: rgb(3, 140, 219);
+}
+.btn-outline:hover {
+  color: rgb(4, 95, 148);
+}
+.btn-outline:hover {
+  outline: none;
+}
+.btn-info {
+  background-color: rgb(3, 140, 219);
+}
+.btn-info:hover {
+  background-color: rgb(4, 95, 148);
+}
+
+.btn-success {
+  background-color: rgb(7, 129, 13);
+}
+.btn-success:hover {
+  background-color: rgb(6, 104, 11);
+}
+.btn-cancel {
+  background-color: rgb(216, 74, 8);
+}
+.btn-cancel:hover {
+  background-color: rgb(180, 62, 8);
+}
