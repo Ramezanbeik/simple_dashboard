@@ -46,7 +46,3 @@ export const removeItemLocalStorage = ({ key }) => {
   });
   localStorage.removeItem(key);
 };
-
-export const setSession = () => {};
-export const getSession = () => {};
-export const removeSession = () => {};
