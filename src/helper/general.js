@@ -15,8 +15,6 @@ export const createUrl = ({ apiPath, param }) => {
 };
 
 export const setLocalStorage = ({ key, value }) => {
-  console.log(key);
-
   createThrowExeption({
     value: key,
     message: "Please Provide key For Set Data in Local Storage",

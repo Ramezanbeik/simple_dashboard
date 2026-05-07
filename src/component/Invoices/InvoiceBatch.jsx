@@ -1,7 +1,6 @@
 import React from "react";
 import Button from "../baseComponent/Button";
 const InvoiceBatch = (props) => {
-  console.log(props);
   return (
     <>
       <p>

@@ -7,7 +7,6 @@ const instanceAxios = axios.create({
 instanceAxios.interceptors.request.use(
   function (config) {
     // Do something before the request is sent
-    console.log({ config });
     return config;
   },
   function (error) {
@@ -20,12 +19,10 @@ instanceAxios.interceptors.response.use(
   function (response) {
     // Any status code that lies within the range of 2xx causes this function to trigger
     // Do something with response data
-    console.log({ response });
 
     return response;
   },
   function (error) {
-    console.log({ error });
     // Any status codes that fall outside the range of 2xx cause this function to trigger
     // Do something with response error
     return Promise.reject(error);
