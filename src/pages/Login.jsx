@@ -6,12 +6,17 @@ import { useAuth } from "../hooks/useAut";
 import "../css/login-style.css";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import { HOME_ROUTE } from "../helper/routeConstant";
+// import { USERS } from "../constant/storageConstant";
+// import { getLocalStorage } from "../helper/general";
 const Login = () => {
-  const { login, isAuthenticated, error } = useAuth();
+  const { login, isAuthenticated, error, user } = useAuth();
+  // console.log(user);
+
   const [loginValue, setloginValue] = useState({
-    userName: "",
-    password: "",
+    userName: user?.userName ?? "",
+    password: user?.pass ?? "",
   });
+  // const previousLoginUser = getLocalStorage({ key: USERS });
   const setValue = (event) => {
     const { id, value } = event.target;
     setloginValue((prevState) => {
@@ -34,7 +39,7 @@ const Login = () => {
         <Input
           id="userName"
           label="User Name"
-          initValue={loginValue.userName}
+          initValue={user?.userName}
           placeHolder="userName"
           onBlure={(event) => setValue(event)}
           isRequired={{ type: "isEmpty", fnValidation: () => {} }}
@@ -43,7 +48,7 @@ const Login = () => {
         <Input
           id="password"
           label="Password"
-          initValue={loginValue.password}
+          initValue={user?.pass}
           placeHolder="Password"
           onBlure={(event) => setValue(event)}
           type="password"

@@ -1,8 +1,6 @@
 import React from "react";
 import Button from "../baseComponent/Button";
 const Rental = (props) => {
-  // console.log(props);
-
   return (
     <>
       <p>

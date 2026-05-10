@@ -36,6 +36,17 @@ export const getLocalStorage = ({ key }) => {
   const data = localStorage.getItem(key);
   return data ? JSON.parse(data) : data;
 };
+export const InitialLocalStorage = ({ key }) => {
+  createThrowExeption({
+    value: key,
+    message: "Please Provide key For Get Data From Local Storage",
+    cause: "Local Storage",
+  });
+  const existed = getLocalStorage({ key });
+  if (!existed) {
+    setLocalStorage({ key, value: [] });
+  }
+};
 export const removeItemLocalStorage = ({ key }) => {
   createThrowExeption({
     value: key,
@@ -43,4 +54,35 @@ export const removeItemLocalStorage = ({ key }) => {
     cause: "Local Storage",
   });
   localStorage.removeItem(key);
+};
+export const setNewKeyToExistedKeyLocalStoage = ({
+  existedKey,
+  newKey,
+  newValue,
+}) => {
+  const findExistedKey = getLocalStorage({ key: existedKey });
+  if (findExistedKey) {
+    let createdNewValue = null;
+    //type of Existed Key is Array
+    if (Array.isArray(findExistedKey)) {
+      if (findExistedKey.length) {
+        let isExist = false;
+
+        findExistedKey.forEach((user) => {
+          if (Object.keys(user).includes(newKey)) isExist = true;
+        });
+        if (!isExist)
+          createdNewValue = [{ [newKey]: newValue }, ...findExistedKey];
+      } else createdNewValue = [{ [newKey]: newValue }];
+    }
+    //type of Existed Key is Object
+    else {
+      createdNewValue = { [newKey]: newValue, ...findExistedKey };
+    }
+    createdNewValue &&
+      setLocalStorage({ key: existedKey, value: createdNewValue });
+  } else
+    throw new Error(`Can Not Find ${existedKey} in Local Storage`, {
+      cause: "Local Storage",
+    });
 };

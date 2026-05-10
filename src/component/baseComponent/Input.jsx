@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/input-style.css";
 const Input = ({
   id,
@@ -19,6 +19,9 @@ const Input = ({
   isRequired = null,
 }) => {
   const [inputValue, setInputValue] = useState(initValue);
+  useEffect(() => {
+    setInputValue(initValue);
+  }, [initValue]);
   return (
     <div className={containerClassName}>
       <label htmlFor={id} className={labelClassName}>
@@ -44,10 +47,10 @@ const Input = ({
         onChange={(event) => {
           const { value } = event.target;
           setInputValue(value);
-          onChange?.();
+          if (initValue !== inputValue) onChange?.();
         }}
         onBlur={(event) => {
-          onBlure?.(event);
+          if (initValue !== inputValue) onBlure?.(event);
         }}
       />
     </div>

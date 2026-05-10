@@ -5,6 +5,7 @@ import { Switch, BrowserRouter as Router } from "react-router-dom";
 
 // import * as serviceWorker from "./serviceWorker";
 import "../src/css/general-style.css";
+import "@contentstack/react-toastify/dist/ReactToastify.css";
 import AuthContext from "./context/AuthContext";
 ReactDOM.render(
   <AuthContext>
