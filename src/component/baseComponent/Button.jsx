@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory, Prompt } from "react-router-dom";
-import { BUTTON_TYPE } from "../../helper/buttonConstatn";
+import { BUTTON_TYPE } from "../../constant/buttonConstatn";
 import { clsx } from "clsx";
 import "../../css/button-style.css";
 const Button = ({

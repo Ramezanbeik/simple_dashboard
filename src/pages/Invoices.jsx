@@ -1,7 +1,10 @@
 import React from "react";
 import Introduction from "../component/Introduction";
 import { Link } from "react-router-dom/cjs/react-router-dom";
-import { INVOICE_BATCH_PATHS, INVOICE_PATHS } from "../helper/InvoiceRoute";
+import {
+  INVOICE_BATCH_PATHS,
+  INVOICE_PATHS,
+} from "../constant/InvoiceConstant";
 
 const Invoices = () => {
   return (

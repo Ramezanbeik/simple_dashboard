@@ -1,7 +1,10 @@
 import React from "react";
 import Introduction from "../component/Introduction";
 import { Link } from "react-router-dom";
-import { RENTAL_INVENTORY_PATHS, RENTAL_PATHS } from "../helper/RentalRoute";
+import {
+  RENTAL_INVENTORY_PATHS,
+  RENTAL_PATHS,
+} from "../constant/RentalConstant";
 
 const Rentals = () => {
   return (
@@ -10,7 +13,7 @@ const Rentals = () => {
         methodType="Render Method"
         srcPath={[
           "src\\pages\\Rentals.jsx",
-          "src\\component\\helper\\RentalRoute.js",
+          "src\\component\\RentalConstant.js",
         ]}
         description="Befor Click On Link Rental Rental Inventory Please Open Inspect Browser or Press F12"
       />

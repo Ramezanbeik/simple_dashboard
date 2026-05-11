@@ -4,7 +4,7 @@ import {
   HOME_ROUTE,
   INVOICES_CATEGORY_PATHS,
   RENTAL_CATEGORY_PATHS,
-} from "../../helper/routeConstant";
+} from "../../constant/routeConstant";
 
 const PrivateLink = ({ children, ...props }) => {
   const { isAuthenticated } = props;
