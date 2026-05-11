@@ -18,7 +18,7 @@ const Input = ({
   autoFocus = false,
   isRequired = null,
 }) => {
-  const [inputValue, setInputValue] = useState(initValue);
+  const [inputValue, setInputValue] = useState("");
   useEffect(() => {
     setInputValue(initValue);
   }, [initValue]);
@@ -43,7 +43,7 @@ const Input = ({
         placeholder={placeHolder}
         autoComplete={autoComplete}
         required={required}
-        value={inputValue ?? {}}
+        value={inputValue}
         onChange={(event) => {
           const { value } = event.target;
           setInputValue(value);

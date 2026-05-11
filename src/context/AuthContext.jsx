@@ -6,42 +6,69 @@ import React, {
 } from "react";
 import { getServer } from "../services/apiServices";
 import {
-  getLocalStorage,
-  InitialLocalStorage,
-  setNewKeyToExistedKeyLocalStoage,
-} from "../helper/general";
-import { CURRENT_USER, USERS } from "../constant/storageConstant";
+  getStorage,
+  initialStorage,
+  setNewKeyToExistedKeyStoage,
+} from "../helper/storageHelper";
+import {
+  CURRENT_USER,
+  LOCALSTORAGE,
+  SESSIONSTORAGE,
+  USERS,
+} from "../constant/storageConstant";
 import { USER_API } from "../constant/apiConstant";
+import { v4 as uuidV4 } from "uuid";
 export const userContext = createContext();
 const AuthContext = ({ children }) => {
   const [state, setStatus] = useState({
     status: "success",
     error: null,
-    user: null,
-    shouldBeRredirect: true,
+    user: "",
+    isUserHasSession: false,
   });
   useLayoutEffect(() => {
-    //inital Local Storage
-    InitialLocalStorage({ key: USERS });
-    //if User Befor Login And Data Exist in Local Storage Redirect To Home Page
-    const usersInLocalStotage = getLocalStorage({ key: USERS });
-    // console.log({ usersInLocalStotage });
-    if (usersInLocalStotage.length >= 1) {
-      const userCode = Object.keys(usersInLocalStotage[0]);
-      setStatus({
-        ...usersInLocalStotage[0][userCode],
-        shouldBeRredirect: usersInLocalStotage.length >= 1 ? false : true,
+    //inital Storage
+    const initialValue = async () => {
+      await initialStorage({
+        typeStorage: LOCALSTORAGE,
+        key: USERS,
+        value: [],
       });
-    }
+      await initialStorage({
+        typeStorage: SESSIONSTORAGE,
+        key: USERS,
+        value: {},
+      });
+      // await initialStorage({ typeStorage: SESSIONSTORAGE, key: USERS });
+      const { data: usersInLocalStorage } = await getStorage({
+        typeStorage: LOCALSTORAGE,
+        key: USERS,
+      });
+      if (usersInLocalStorage.length >= 1) {
+        const userCode = Object.keys(usersInLocalStorage[0]);
+        const { data: usersSession } = await getStorage({
+          typeStorage: SESSIONSTORAGE,
+          key: USERS,
+        });
+        const isUserHasSession = !!usersSession[userCode];
+        setStatus({
+          ...usersInLocalStorage[0][userCode],
+          isUserHasSession,
+        });
+      }
+    };
+    initialValue();
   }, []);
   useEffect(() => {
     //After Get Data From API and setData,Data is Set To Local Storage too
-    if (state.user)
-      setNewKeyToExistedKeyLocalStoage({
+    if (state.user) {
+      setNewKeyToExistedKeyStoage({
+        typeStorage: LOCALSTORAGE,
         existedKey: USERS,
         newKey: `${CURRENT_USER}_${state.user.id}`,
         newValue: state,
       });
+    }
   }, [state]);
   const login = async ({ userName, password }) => {
     //change Status to pending
@@ -63,18 +90,26 @@ const AuthContext = ({ children }) => {
       data[0].userName === userName &&
       data[0].pass === password
     ) {
-      setStatus((state) => {
+      setNewKeyToExistedKeyStoage({
+        typeStorage: SESSIONSTORAGE,
+        existedKey: USERS,
+        newKey: `${CURRENT_USER}_${data[0].id}`,
+        newValue: uuidV4(),
+      });
+
+      setStatus((prevState) => {
         return {
-          ...state,
+          ...prevState,
           user: data[0],
           status: "success",
           error: null,
+          isUserHasSession: true,
         };
       });
     } else {
-      setStatus((state) => {
+      setStatus((prevState) => {
         return {
-          ...state,
+          ...prevState,
           user: null,
           status: "falied",
           error: "userName or password is Not Corrected.",

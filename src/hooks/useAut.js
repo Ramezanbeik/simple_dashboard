@@ -5,8 +5,9 @@ export const useAuth = () => {
   const isSuccess = state.status === "success";
   const isPending = state.status === "pending";
   const isError = state.status === "error";
-  const isAuthenticated = state.user && isSuccess && state.shouldBeRredirect;
-  const { login, logout, error, user } = state;
+  const isAuthenticated = !!state.user;
+  const { login, logout, error, user, isUserHasSession } = state;
+
   return {
     user,
     error,
@@ -14,6 +15,7 @@ export const useAuth = () => {
     isError,
     isSuccess,
     isAuthenticated,
+    isUserHasSession,
     login,
     logout,
   };
