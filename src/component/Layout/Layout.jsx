@@ -23,61 +23,66 @@ import { RENTAL_INVENTORY_PATHS, RENTAL_PATHS } from "../../helper/RentalRoute";
 import Rental from "../Rentals/Rental";
 import RentalInventory from "../Rentals/RentalInventory";
 const Layout = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isUserHasSession } = useAuth();
+
+  const isPrivateAuthenticated = isAuthenticated && isUserHasSession;
   return (
     <>
-      {!isAuthenticated && <Redirect to={LOGIN_PATHS.path} />}
+      {!isPrivateAuthenticated && <Redirect to={LOGIN_PATHS.path} />}
       <div className="container-layout">
-        <PrivateLink isAuthenticated={isAuthenticated} />
+        <PrivateLink isAuthenticated={isPrivateAuthenticated} />
         <Switch>
           <PrivateLayout
             path={HOME_ROUTE.path}
-            isAuthenticated={isAuthenticated}
+            isAuthenticated={isPrivateAuthenticated}
           >
             <BaseSample />
           </PrivateLayout>
           <PrivateLayout
             path={INVOICES_CATEGORY_PATHS.path}
-            isAuthenticated={isAuthenticated}
+            isAuthenticated={isPrivateAuthenticated}
           >
             <Invoices />
           </PrivateLayout>
           <PrivateLayout
             path={RENTAL_CATEGORY_PATHS.path}
-            isAuthenticated={isAuthenticated}
+            isAuthenticated={isPrivateAuthenticated}
           >
             <Rentals />
           </PrivateLayout>
-          <PrivateLayout path="/home" isAuthenticated={isAuthenticated}>
+          <PrivateLayout path="/home" isAuthenticated={isPrivateAuthenticated}>
             <Home />
           </PrivateLayout>
-          <PrivateLayout path="/news" isAuthenticated={isAuthenticated}>
+          <PrivateLayout path="/news" isAuthenticated={isPrivateAuthenticated}>
             <News />
           </PrivateLayout>
-          <PrivateLayout path="/production" isAuthenticated={isAuthenticated}>
+          <PrivateLayout
+            path="/production"
+            isAuthenticated={isPrivateAuthenticated}
+          >
             <Production />
           </PrivateLayout>
           <PrivateLayout
             path={INVOICE_PATHS.path}
-            isAuthenticated={isAuthenticated}
+            isAuthenticated={isPrivateAuthenticated}
           >
             <Invoice />
           </PrivateLayout>
           <PrivateLayout
             path={INVOICE_BATCH_PATHS.path}
-            isAuthenticated={isAuthenticated}
+            isAuthenticated={isPrivateAuthenticated}
           >
             <InvoiceBatch />
           </PrivateLayout>
           <PrivateLayout
             path={RENTAL_PATHS.path}
-            isAuthenticated={isAuthenticated}
+            isAuthenticated={isPrivateAuthenticated}
           >
             <Rental />
           </PrivateLayout>
           <PrivateLayout
             path={RENTAL_INVENTORY_PATHS.path}
-            isAuthenticated={isAuthenticated}
+            isAuthenticated={isPrivateAuthenticated}
           >
             <RentalInventory />
           </PrivateLayout>

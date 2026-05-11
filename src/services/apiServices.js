@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createThrowExeption, createUrl } from "../helper/general";
+import { createThrowExeption, createUrl } from "../helper/generalHelper";
 import { toast } from "@contentstack/react-toastify";
 
 const instanceAxios = axios.create({
@@ -30,8 +30,6 @@ instanceAxios.interceptors.response.use(
     const { code } = error;
     switch (code) {
       case "ERR_NETWORK":
-        console.log("show Toast");
-
         toast("Network Error. Failed Connect To Server", {
           type: "error",
           autoClose: true,

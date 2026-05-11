@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../component/baseComponent/Input";
 import Button from "../component/baseComponent/Button";
 import { BUTTON_TYPE } from "../helper/buttonConstatn";
@@ -6,17 +6,12 @@ import { useAuth } from "../hooks/useAut";
 import "../css/login-style.css";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import { HOME_ROUTE } from "../helper/routeConstant";
-// import { USERS } from "../constant/storageConstant";
-// import { getLocalStorage } from "../helper/general";
 const Login = () => {
-  const { login, isAuthenticated, error, user } = useAuth();
-  // console.log(user);
-
+  const { login, isAuthenticated, isUserHasSession, error, user } = useAuth();
   const [loginValue, setloginValue] = useState({
-    userName: user?.userName ?? "",
-    password: user?.pass ?? "",
+    userName: "",
+    password: "",
   });
-  // const previousLoginUser = getLocalStorage({ key: USERS });
   const setValue = (event) => {
     const { id, value } = event.target;
     setloginValue((prevState) => {
@@ -27,6 +22,15 @@ const Login = () => {
     event.preventDefault();
     login({ userName: loginValue.userName, password: loginValue.password });
   };
+  useEffect(
+    () =>
+      user &&
+      setloginValue({
+        userName: user?.userName,
+        password: user?.pass,
+      }),
+    [user],
+  );
   return (
     <form
       onSubmit={(event) => {
@@ -39,16 +43,15 @@ const Login = () => {
         <Input
           id="userName"
           label="User Name"
-          initValue={user?.userName}
+          initValue={user?.userName ?? ""}
           placeHolder="userName"
           onBlure={(event) => setValue(event)}
-          isRequired={{ type: "isEmpty", fnValidation: () => {} }}
           autoFocus
         />
         <Input
           id="password"
           label="Password"
-          initValue={user?.pass}
+          initValue={user?.pass ?? ""}
           placeHolder="Password"
           onBlure={(event) => setValue(event)}
           type="password"
@@ -59,7 +62,9 @@ const Login = () => {
           onClick={submitLogin}
           disabled={!loginValue?.userName || !loginValue.password}
         />
-        {isAuthenticated && <Redirect to={HOME_ROUTE.path} />}
+        {isAuthenticated && isUserHasSession && (
+          <Redirect to={HOME_ROUTE.path} />
+        )}
         {error && <p className="error-message">{error}</p>}
       </div>
     </form>
