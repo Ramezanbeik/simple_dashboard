@@ -4,13 +4,13 @@ import { BUTTON_TYPE } from "../../constant/buttonConstatn";
 import { clsx } from "clsx";
 import "../../css/button-style.css";
 const Button = ({
-  caption = "Back To Home",
   shouldBeConfirm = false,
   promptMessage = "Are You Sure Leave This Page?",
   type = BUTTON_TYPE.BACK,
   onClick,
   customClass = null,
   disabled,
+  children,
 }) => {
   const history = useHistory();
   const handleButton = () => {
@@ -18,27 +18,32 @@ const Button = ({
       case BUTTON_TYPE.BACK:
         history.goBack();
         break;
-      case BUTTON_TYPE.SUCCESS:
-        onClick();
-        break;
+
       default:
+        onClick?.();
         break;
     }
+  };
+  const getTypeButton = () => {
+    if (type === BUTTON_TYPE.SUCCESS) return "submit";
+    return "button";
   };
   return (
     <>
       <button
+        type={getTypeButton()}
         className={clsx("btn", customClass, {
           "btn-outline": type === BUTTON_TYPE.OUTLINE,
           "btn-info": type === BUTTON_TYPE.INFO,
           "btn-success": type === BUTTON_TYPE.SUCCESS,
           "btn-back": type === BUTTON_TYPE.BACK,
           "btn-cancel": type === BUTTON_TYPE.CANCEL,
+          "btn-icon": type === BUTTON_TYPE.ICON,
         })}
         onClick={handleButton}
         disabled={disabled}
       >
-        {caption}
+        {children}
       </button>
       {shouldBeConfirm && type === BUTTON_TYPE.BACK && (
         <Prompt message={promptMessage} />

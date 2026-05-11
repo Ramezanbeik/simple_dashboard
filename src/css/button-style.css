@@ -58,3 +58,13 @@
 .btn-cancel:hover {
   background-color: rgb(180, 62, 8);
 }
+.btn-icon {
+  width: 1.7rem;
+  height: 1.7rem;
+  background-color: rgba(128, 128, 128, 0.26);
+  border-radius: 4rem;
+}
+
+.btn-icon:hover {
+  background-color: rgba(128, 128, 128, 0.795);
+}

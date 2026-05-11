@@ -1,5 +1,9 @@
-import { LOCALSTORAGE, SESSIONSTORAGE } from "../constant/storageConstant";
-import { createThrowExeption } from "./generalHelper";
+import {
+  LOCALSTORAGE,
+  SESSIONSTORAGE,
+  USERS,
+} from "../constant/storageConstant";
+import { createThrowExeption, flatArrayObjectToArray } from "./generalHelper";
 
 const timeOut = 10;
 
@@ -40,7 +44,12 @@ export const setStorage = async ({ typeStorage, key, value }) => {
     }, timeOut);
   });
 };
-export const getStorage = async ({ typeStorage, key }) => {
+export const getStorage = async ({
+  typeStorage,
+  key,
+  isReturnArray = false,
+  flatBykey = "",
+}) => {
   const message = `Please Provide key For Set Data in ${typeStorage} Storage`;
   const cause = `${typeStorage} Storage`;
   createThrowExeption({ value: key, message, cause });
@@ -50,9 +59,14 @@ export const getStorage = async ({ typeStorage, key }) => {
       : sessionStorage.getItem(key);
 
   return await new Promise((resolve) => {
+    const castingData = (data) => {
+      if (data && isReturnArray && Array.isArray(data) && key === USERS) {
+        return flatArrayObjectToArray({ sourceArray: data, key: flatBykey });
+      } else return data;
+    };
     setTimeout(() => {
       resolve({
-        data: JSON.parse(data),
+        data: castingData(JSON.parse(data)),
         isSuccess: true,
         msg: `get data ${key} from ${typeStorage} Storage is Success`,
       });

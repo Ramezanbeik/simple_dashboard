@@ -1,7 +1,8 @@
 export const BUTTON_TYPE = {
-  OUTLINE: "back",
+  OUTLINE: "outline",
   INFO: "submit",
   SUCCESS: "success",
   BACK: "back",
   CANCEL: "cancel",
+  ICON: "icon",
 };
