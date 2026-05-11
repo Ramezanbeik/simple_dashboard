@@ -50,7 +50,7 @@ const AuthContext = ({ children }) => {
           typeStorage: SESSIONSTORAGE,
           key: USERS,
         });
-        const isUserHasSession = !!usersSession[userCode];
+        let isUserHasSession = !!usersSession?.[userCode];
         setStatus({
           ...usersInLocalStorage[0][userCode],
           isUserHasSession,
