@@ -12,6 +12,7 @@ html {
   font-size: 16px;
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
+  box-sizing: border-box;
 }
 
 /* Sections
@@ -22,13 +23,20 @@ html {
  */
 
 body {
-  margin: 0;
+  margin: unset;
   width: 100vw;
   height: 100vh;
+  box-sizing: inherit;
 }
 #root {
   height: inherit;
   width: inherit;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
 }
 
 /**

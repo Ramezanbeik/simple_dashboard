@@ -3,9 +3,7 @@ import App from "./App";
 import ReactDOM from "react-dom";
 import { Switch, BrowserRouter as Router } from "react-router-dom";
 import AuthContext from "./context/AuthContext";
-import "../src/css/general-style.css";
-import "@contentstack/react-toastify/dist/ReactToastify.css";
-import "../src/css/fontAwesome/css/all.css";
+import "../src/css/app-style.css";
 // import * as serviceWorker from "./serviceWorker";
 ReactDOM.render(
   <AuthContext>

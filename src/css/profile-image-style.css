@@ -1,0 +1,18 @@
+.image-wraper {
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid gray;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3rem;
+  background-color: rgb(80, 79, 79);
+}
+.image-container {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 1.56rem;
+}
+.image-container:hover {
+  cursor: pointer;
+}

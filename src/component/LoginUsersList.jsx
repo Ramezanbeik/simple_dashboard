@@ -27,7 +27,7 @@ const LoginUserList = ({ users, currentUser, onChangeUser, OnDeleteUser }) => {
               })}
             >
               <div className="d-flex d-flex-align-anchor-center">
-                <i className="fa fa-user-circle fa-2x mr-0_5 " />
+                <i className="fa fa-user-circle fa-2x pd-r" />
                 <span>{user.firstName}</span>
                 <span>{user.lastName}</span>
               </div>
