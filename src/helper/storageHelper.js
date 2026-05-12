@@ -99,6 +99,43 @@ export const removeItemStorage = async ({ typeStorage, key }) => {
     ? localStorage.removeItem(key)
     : sessionStorage.removeItem(key);
 };
+
+export const removeKeyFromExistedKeyStoage = async ({
+  typeStorage,
+  existedKey,
+  removeKey,
+}) => {
+  const { data: findExistedKey } = await getStorage({
+    typeStorage,
+    key: existedKey,
+  });
+  if (findExistedKey) {
+    let createdNewValue = null;
+    if (Array.isArray(findExistedKey)) {
+      findExistedKey.forEach((key, index) => {
+        if (Object.keys(key).includes(removeKey)) {
+          createdNewValue = [...findExistedKey];
+          createdNewValue.splice(index, 1);
+        }
+      });
+    } else {
+      createdNewValue = { ...findExistedKey };
+      delete createdNewValue[removeKey];
+    }
+    if (createdNewValue) {
+      const { isSuccess } = await setStorage({
+        typeStorage,
+        key: existedKey,
+        value: createdNewValue,
+      });
+      return isSuccess;
+    }
+  } else
+    throw new Error(`Can Not Find ${existedKey} in ${typeStorage} Storage`, {
+      cause: `${typeStorage} Storage`,
+    });
+};
+
 export const setNewKeyToExistedKeyStoage = async ({
   typeStorage,
   existedKey,
@@ -114,8 +151,8 @@ export const setNewKeyToExistedKeyStoage = async ({
     //type of Existed Key is Array
     if (Array.isArray(findExistedKey)) {
       let isExist = false;
-      findExistedKey.forEach((user) => {
-        if (Object.keys(user).includes(newKey)) isExist = true;
+      findExistedKey.forEach((key) => {
+        if (Object.keys(key).includes(newKey)) isExist = true;
       });
       if (!isExist)
         createdNewValue = [...findExistedKey, { [newKey]: newValue }];
@@ -126,7 +163,7 @@ export const setNewKeyToExistedKeyStoage = async ({
     createdNewValue &&
       setStorage({ typeStorage, key: existedKey, value: createdNewValue });
   } else
-    throw new Error(`Can Not Find ${existedKey} in Local Storage`, {
-      cause: "Local Storage",
+    throw new Error(`Can Not Find ${existedKey} in ${typeStorage} Storage`, {
+      cause: `${typeStorage} Storage`,
     });
 };

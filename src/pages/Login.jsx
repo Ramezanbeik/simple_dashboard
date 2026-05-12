@@ -5,9 +5,12 @@ import { BUTTON_TYPE } from "../constant/buttonConstatn";
 import { useAuth } from "../hooks/useAut";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import { HOME_ROUTE } from "../constant/routeConstant";
-import { getStorage } from "../helper/storageHelper";
-import { LOCALSTORAGE, USERS } from "../constant/storageConstant";
+import { CURRENT_USER, LOCALSTORAGE, USERS } from "../constant/storageConstant";
 import LoginUserList from "../component/LoginUsersList";
+import {
+  getStorage,
+  removeKeyFromExistedKeyStoage,
+} from "../helper/storageHelper";
 import "../css/login-style.css";
 const Login = () => {
   const { login, isAuthenticated, isUserHasSession, error, user } = useAuth();
@@ -17,6 +20,7 @@ const Login = () => {
     currentUser: null,
     userName: "",
     password: "",
+    removeUerFormLocalStorage: null,
   });
   const setValue = (event) => {
     const { id, value } = event.target;
@@ -44,7 +48,7 @@ const Login = () => {
       });
     };
     getPreviousUserFormLocalStorage();
-  }, []);
+  }, [loginValue.removeUerFormLocalStorage]);
   useEffect(() => {
     user &&
       setloginValue((prevState) => {
@@ -65,6 +69,20 @@ const Login = () => {
         currentUser: user,
       };
     });
+  };
+  const handleOnDeletUser = async (user) => {
+    const isRemoved = await removeKeyFromExistedKeyStoage({
+      typeStorage: LOCALSTORAGE,
+      existedKey: USERS,
+      removeKey: `${CURRENT_USER}_${user.id}`,
+    });
+    isRemoved &&
+      setloginValue((prveState) => {
+        return {
+          ...prveState,
+          removeUerFormLocalStorage: !prveState.removeUerFormLocalStorage,
+        };
+      });
   };
   return (
     <form
@@ -97,6 +115,7 @@ const Login = () => {
               currentUser={loginValue.currentUser}
               users={loginValue.previousUserLoggin}
               onChangeUser={(user) => handleOnChangeUser(user)}
+              OnDeleteUser={(user) => handleOnDeletUser(user)}
             />
           </div>
         )}

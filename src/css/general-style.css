@@ -19,6 +19,10 @@
 .d-flex-align-baseline {
   align-items: baseline;
 }
+.d-flex-align-anchor-center {
+  align-items: anchor-center;
+}
+
 .d-flex-align-center {
   align-items: center;
 }
@@ -72,6 +76,9 @@
 }
 .d-none {
   display: none;
+}
+.mr-0_5 {
+  margin-right: 0.5rem;
 }
 .error-message {
   color: red;

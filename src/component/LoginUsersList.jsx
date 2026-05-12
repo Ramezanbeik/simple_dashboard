@@ -3,10 +3,12 @@ import React, { memo } from "react";
 import Button from "./baseComponent/Button";
 import { BUTTON_TYPE } from "../constant/buttonConstatn";
 
-const LoginUserList = ({ users, currentUser, onChangeUser }) => {
-  const handleClick = (user) =>
+const LoginUserList = ({ users, currentUser, onChangeUser, OnDeleteUser }) => {
+  const handleOnChangeUserClick = (user) =>
     user?.id !== currentUser.id && onChangeUser?.(user);
-
+  const handleOnDeleteClick = (user) => {
+    OnDeleteUser?.(user);
+  };
   return (
     <ul>
       {users?.map((user) => (
@@ -16,7 +18,7 @@ const LoginUserList = ({ users, currentUser, onChangeUser }) => {
         >
           <li
             onClick={() => {
-              handleClick(user);
+              handleOnChangeUserClick(user);
             }}
           >
             <div
@@ -24,14 +26,17 @@ const LoginUserList = ({ users, currentUser, onChangeUser }) => {
                 "login-user-list-selected": currentUser?.id === user.id,
               })}
             >
-              <span>{user.firstName}</span>
-              <span>{user.lastName}</span>
+              <div className="d-flex d-flex-align-anchor-center">
+                <i className="fa fa-user-circle fa-2x mr-0_5 " />
+                <span>{user.firstName}</span>
+                <span>{user.lastName}</span>
+              </div>
             </div>
           </li>
           <Button
             type={BUTTON_TYPE.ICON}
             onClick={() => {
-              console.log("delete");
+              handleOnDeleteClick(user);
             }}
             customClass="error-message"
           >

@@ -22,8 +22,7 @@ export const userContext = createContext();
 const AuthContext = ({ children }) => {
   const [state, setStatus] = useState({
     status: "success",
-    error: null,
-    user: "",
+    user: null,
     isUserHasSession: false,
   });
   useLayoutEffect(() => {
