@@ -28,7 +28,8 @@
 
 .login-user-list {
   max-width: 100%;
-  max-height: 5rem;
+  min-height: 7.3rem;
+  max-height: 7.3rem;
   background-color: rgba(128, 128, 128, 0.425);
   border-radius: 0.5rem;
   overflow: hidden;
@@ -41,7 +42,7 @@
   list-style: none;
   margin: unset;
   padding: 0.6rem;
-  color: rgb(32, 124, 243);
+  color: var(--light-blue-800);
   line-height: 2rem;
 }
 .login-user-list ul li:hover {
@@ -52,6 +53,6 @@
   padding-right: 0.2rem;
 }
 .login-user-list-selected {
-  color: green;
+  color: var(--green-700);
   font-weight: 800;
 }

@@ -17,9 +17,12 @@ const Image = ({
       })}
     >
       <img
-        className={clsx(containerCustomeClass, {
-          "image-container-profile": typeImage === PROFILE,
-        })}
+        className={clsx(
+          {
+            "image-container-profile": typeImage === PROFILE,
+          },
+          containerCustomeClass,
+        )}
         src={src ?? "./image/user-template.jpg"}
         alt={alt}
         onClick={() => {

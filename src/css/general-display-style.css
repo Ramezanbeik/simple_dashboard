@@ -39,10 +39,10 @@
   align-items: center;
 }
 .d-flex-align-start {
-  align-items: start;
+  align-items: flex-start;
 }
 .d-flex-align-end {
-  align-items: end;
+  align-items: flex-end;
 }
 .d-flex-align-normal {
   align-items: normal;
@@ -52,6 +52,10 @@
 }
 .d-flex-direction-row {
   flex-direction: row;
+}
+
+.position-static {
+  position: static;
 }
 /* with and height */
 

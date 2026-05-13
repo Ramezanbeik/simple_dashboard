@@ -4,6 +4,7 @@
 @import url("../css/genral-masure-style.css");
 :root {
   --margin-top-header: 3.1rem;
+  --translation: all 0.5s ease-in-out 80ms;
 
   --red-50: #ffebee;
   --red-100: #ffcdd2;

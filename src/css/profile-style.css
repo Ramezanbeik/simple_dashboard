@@ -1,0 +1,30 @@
+.container-profile {
+  position: relative;
+}
+
+.image-container-profile {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 1.56rem;
+}
+.list-profile {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  padding: 1.5rem 0rem;
+  top: 3rem;
+  z-index: 1000;
+  background-color: rgba(245, 245, 245, 0.98);
+  width: 15rem;
+  height: 25rem;
+  border-radius: 1.5rem;
+  visibility: hidden;
+  transition: var(--translation);
+  transform: translateY(12);
+}
+.container-profile:hover .list-profile {
+  visibility: visible;
+}
