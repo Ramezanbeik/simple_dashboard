@@ -1,4 +1,3 @@
-import React from "react";
 import { Route } from "react-router-dom/cjs/react-router-dom";
 import Invoice from "../component/Invoices/Invoice";
 import InvoiceBatch from "../component/Invoices/InvoiceBatch";

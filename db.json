@@ -6,7 +6,7 @@
       "lastName": "Ramezanbeik",
       "userName": "mrb",
       "pass": "123",
-      "image": "",
+      "image": null,
       "token": "375b2830-8621-4eb7-b302-17a2d0d1dad8"
     },
     {
@@ -15,7 +15,7 @@
       "lastName": "Ahmadi",
       "userName": "za",
       "pass": "123456",
-      "image": "",
+      "image": null,
       "token": "375b2830-8621-4eb7-b302-17a2d0d1dad9"
     }
   ]

@@ -1,11 +1,14 @@
-import "../../css/profile-image-style.css";
-const Profile = () => {
+import { PROFILE } from "../../constant/imageConstant";
+import Image from "../baseComponent/Image";
+
+const Profile = ({ user }) => {
   return (
     <>
-      <img
-        className="image-container"
-        src="./image/user-trmplate.jpg"
-        alt="user"
+      <Image
+        src={user?.image}
+        alt={`image-${user?.userName}`}
+        typeImage={PROFILE}
+        onClick={() => console.log("click Image")}
       />
     </>
   );

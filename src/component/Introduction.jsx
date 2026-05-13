@@ -1,4 +1,3 @@
-import React from "react";
 const Introduction = ({ methodType, srcPath, description = null }) => {
   const isPahtArray = typeof srcPath === "object";
   return (

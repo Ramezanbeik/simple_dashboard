@@ -1,4 +1,3 @@
-import React from "react";
 import Introduction from "../component/Introduction";
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import {

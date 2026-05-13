@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Input from "../component/baseComponent/Input";
 import Button from "../component/baseComponent/Button";
 import { BUTTON_TYPE } from "../constant/buttonConstatn";

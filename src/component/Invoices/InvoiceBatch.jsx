@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "../baseComponent/Button";
 const InvoiceBatch = (props) => {
   return (

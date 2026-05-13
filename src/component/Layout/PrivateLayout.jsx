@@ -1,4 +1,3 @@
-import React from "react";
 import { Route } from "react-router-dom";
 
 const PrivateLayout = ({ children, ...props }) => {

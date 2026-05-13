@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import {
   HOME_ROUTE,
@@ -31,8 +30,7 @@ import RentalInventory from "../Rentals/RentalInventory";
 import clsx from "clsx";
 import HeaderLayout from "./HeaderLayout";
 const Layout = () => {
-  const { isAuthenticated, isUserHasSession } = useAuth();
-
+  const { isAuthenticated, isUserHasSession, user } = useAuth();
   const isPrivateAuthenticated = isAuthenticated && isUserHasSession;
   return (
     <>
@@ -43,7 +41,7 @@ const Layout = () => {
             "d-none": !isPrivateAuthenticated,
           })}
         >
-          <HeaderLayout />
+          <HeaderLayout user={user} />
         </div>
         <div className="container-layout">
           <PrivateLink isAuthenticated={isPrivateAuthenticated} />

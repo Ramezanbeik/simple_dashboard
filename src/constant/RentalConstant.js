@@ -1,4 +1,3 @@
-import React from "react";
 import { Route } from "react-router-dom/cjs/react-router-dom";
 import Rental from "../component/Rentals/Rental";
 import RentalInventory from "../component/Rentals/RentalInventory";
